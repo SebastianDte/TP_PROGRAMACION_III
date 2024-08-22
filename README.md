@@ -7,7 +7,7 @@
 | **Sebastián Duarte**  | [sebastianDte](https://github.com/sebastianDte) |
 | **Francisco Molina**  | [fmolinadev](https://github.com/fmolinadev) |
 | **Lucas Díaz**        | [lmd-git](https://github.com/lmd-git) |
-| **Elizabeth**         | [Elizabeth](https://github.com/elizabethluquez) |
+| **Elizabeth**         | [elizabethluquez](https://github.com/elizabethluquez) |
 | **SOlange**           | [Solange](https://github.com/usuario/repositorio5) |
 
 ## Descripción
