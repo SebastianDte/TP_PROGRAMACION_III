@@ -91,10 +91,10 @@ function removeCharactersWithHighID() {
 //***LLAMADAS A LAS FUNCIONES PARA PROBAR LOS PUNTOS.***
 
 // Punto 1: Recuperar información del personaje "Ned Stark"
-//getCharacter('Ned Star');
+//getCharacter('Ned Stark');
 
 // Punto 2 y 3. Muestra por consola todos los persoajes y los guarda en un archivo JSON.
-//etAndSaveAllCharacters();
+//getAndSaveAllCharacters();
 
 // Punto 4.a. Función para mostrar los personajes de la familia Stark
 //displayStarkFamily();
