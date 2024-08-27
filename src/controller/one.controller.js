@@ -1,4 +1,5 @@
 const { writeFileSync } = require('fs');
+const allDataCharacters = require("../../characters.json");
 
 async function getAllCharacters(req, res)  {
   try {
@@ -46,4 +47,22 @@ async function  getCharacterByName(req, res) {
   }
 }
 
-module.exports = { getAllCharacters,getCharacterByName };
+const filteredByFamily = (family) => {
+ 
+    if (!allDataCharacters || allDataCharacters.length === 0) {
+        return "Sin resultados para mostrar";
+    }
+
+    const filteredResults = allDataCharacters.filter(character => 
+        character.family.toLowerCase() === family.toLowerCase()
+    );
+    
+    if(filteredResults){
+      const resultFamily =  filteredResults.length > 0 ? filteredResults : "Sin resultados para mostrar";
+      console.log("EL FILTRO POR FAMILIA->",resultFamily)
+       return res.json(resultFamily);
+    }
+
+};
+
+module.exports = { getAllCharacters,getCharacterByName,filteredByFamily };
