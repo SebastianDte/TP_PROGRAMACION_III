@@ -1,119 +1,132 @@
-// index.js
+import readline from 'readline';
+import { 
+  getCharacter, 
+  getAndSaveAllCharacters, 
+  displayStarkFamily, 
+  addCharacter, 
+  removeCharactersWithHighID, 
+  showUpdatedList
+} from './ejercicio01.js';
 
-import fetch from 'node-fetch'; 
-import fs from 'fs';
+// interfaz E/S de datos en la consola.
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
 
-// Punto 1: Función para obtener información del personaje
-async function getCharacter(name) {
-  try {
-    const response = await fetch('https://thronesapi.com/api/v2/Characters');
-    const characters = await response.json(); 
-    
-    // Buscar el personaje con el nombre especificado por parametro.
-    const character = characters.find(character => character.fullName === name);
-    
-    if (character) {
-      console.log(character); 
-    } else {
-      console.log(`Introdujo un Nombre incorrecto: "${name}" no existe.`);
+// Menú principal
+function showMainMenu() {
+  console.clear();
+  console.log("Pulse '1' para ejecutar el Ejercicio 1.");
+  console.log("Pulse '2' para ejecutar el Ejercicio 2.");
+  console.log("Pulse '0' para salir.");
+  
+  rl.question('Seleccione una opción: ', (opcion) => {
+    switch (parseInt(opcion)) {
+      case 1:
+        ejercicioUnoMenu(); 
+        break;
+      case 2:
+        ejercicioDosMenu(); 
+        break;
+      case 0:
+        console.log('Saliendo...');
+        rl.close(); 
+        return;
+      default:
+        console.log('Opción no válida.');
+        break;
     }
-  } catch (error) {
-    console.error('Error:', error); 
-  }
+  });
 }
 
-// Punto 2 y 3: Función para obtener todos los personajes y guardarlos en un archivo JSON
-async function getAndSaveAllCharacters() {
-  try {
-    const response = await fetch('https://thronesapi.com/api/v2/Characters');
-    const characters = await response.json(); 
+// Menú del Ejercicio 1
+function ejercicioUnoMenu() {
+  console.log("Pulse '1' para recuperar la información del personaje “Ned Stark”");
+  console.log("Pulse '2' para recuperar todos los personajes disponibles y guardarlos localmente en JSON.");
+  console.log("Pulse '3' para mostrar los personajes de la familia Stark.");
+  console.log("Pulse '4' para agregar un nuevo personaje.");
+  console.log("Pulse '5' para eliminar personajes con ID mayor a 25.");
+  console.log("Pulse '6' para ver la lista actualizada de personajes.");
+  console.log("Pulse '0' para volver al menú principal.");
 
-    console.log('Todos los personajes:', characters);
-
-    // Guarda los personajes en un archivo JSON
-    fs.writeFileSync('characters.json', JSON.stringify(characters, null, 2), 'utf8');
-    console.log('Los personajes han sido guardados en "characters.json".'); 
-
-  } catch (error) {
-    console.error('Error:', error); 
-  }
-}
-// Punto 4a: Función para leer el archivo y mostrar los personajes de la familia Stark
-function displayStarkFamily() {
-    try {
-        const data = fs.readFileSync('characters.json', 'utf8');
-        const characters = JSON.parse(data);
-
-        // Filtra los personajes que pertenecen a la familia Stark
-        const starkFamily = characters.filter(character => character.family === 'House Stark');
-
-        // Muestra los personajes de la familia Stark por consola
-        console.log('Personajes de la familia Stark:', starkFamily);
-    } catch (error) {
-        console.error('Error:', error);
+  rl.question('Seleccione una opción: ', async (opcion) => {
+    switch (parseInt(opcion)) {
+      case 1:
+        console.log('Recuperando la información del personaje “Ned Stark”...');
+        await getCharacter('Ned Stark');
+        break;
+      case 2:
+        console.log('Recupernado todos los personajes disponibles y guardandolos localmente...');
+        await getAndSaveAllCharacters();
+        break;
+      case 3:
+        console.log('Mostrando personajes de la familia Stark...');
+        displayStarkFamily();
+        break;
+      case 4:
+        const newCharacter = {
+          id: 100, 
+          firstName: 'Jon',
+          lastName: 'Snow',
+          fullName: 'Jon Snow',
+          title: 'King in the North',
+          family: 'House Stark',
+          image: 'jon-snow.jpg',
+          imageUrl: 'https://thronesapi.com/assets/images/jon-snow.jpg'
+        };
+        console.log('Agregando un nuevo personaje...');
+        addCharacter(newCharacter);
+        break;
+      case 5:
+        console.log('Eliminando personajes con ID mayor a 25...');
+        removeCharactersWithHighID();
+        break;
+        case 6:
+          console.log('Mostrando la lista actualizada de personajes...');
+          showUpdatedList();
+          break;
+      case 0:
+        showMainMenu(); 
+        return;
+      default:
+        console.log('Opción no válida.');
+        break;
     }
+
+    setTimeout(() => {
+      ejercicioUnoMenu(); 
+    }, 1000); 
+  });
 }
 
-// Punto 4b: Función para agregar un nuevo personaje y sobrescribir el archivo original
-function addCharacter(newCharacter) {
-    try {
-        const data = fs.readFileSync('characters.json', 'utf8');
-        const characters = JSON.parse(data);
+// Función Ejercicio 2.
+function ejercicioDosMenu() {
+  console.log("Pulse '1' para ejecutar el punto 1 del Ejercicio 2.");
+  console.log("Pulse '2' para ejecutar el punto 2 del Ejercicio 2.");
+  console.log("Pulse '0' para volver al menú principal.");
 
-        // Agrega el nuevo personaje al array de personajes
-        characters.push(newCharacter);
-
-        // Sobrescribe el archivo con el nuevo array de personajes
-        fs.writeFileSync('characters.json', JSON.stringify(characters, null, 2), 'utf8');
-        console.log('Archivo actualizado con el nuevo personaje.');
-    } catch (error) {
-        console.error('Error:', error);
+  rl.question('Seleccione una opción: ', (opcion) => {
+    switch (parseInt(opcion)) {
+      case 1:
+        console.log('Ejecutando el punto 1 del Ejercicio 2...');
+        // Aquí iría la llamada a la función correspondiente
+        break;
+      case 2:
+        console.log('Ejecutando el punto 2 del Ejercicio 2...');
+        // Aquí iría la llamada a la función correspondiente
+        break;
+      case 0:
+        showMainMenu(); // Volver al menú principal
+        return; // Sale de la función para detener el bucle
+      default:
+        console.log('Opción no válida.');
+        break;
     }
+    setTimeout(() => {
+      showExercise2Menu(); 
+    }, 1000); 
+  });
 }
 
-// Punto 4c: Función para eliminar personajes con ID mayor a 25 y sobrescribir el archivo original
-function removeCharactersWithHighID() {
-    try {
-        const data = fs.readFileSync('characters.json', 'utf8');
-        const characters = JSON.parse(data);
-
-        // Filtra los personajes con ID menor o igual a 25
-        const filteredCharacters = characters.filter(character => character.id <= 25);
-
-        // Sobrescribe el archivo con el array filtrado
-        fs.writeFileSync('characters.json', JSON.stringify(filteredCharacters, null, 2), 'utf8');
-        console.log('Archivo actualizado eliminando personajes con ID mayor a 25.');
-    } catch (error) {
-        console.error('Error:', error);
-    }
-}
-
-//***LLAMADAS A LAS FUNCIONES PARA PROBAR LOS PUNTOS.***
-
-// Punto 1: Recuperar información del personaje "Ned Stark"
-//getCharacter('Ned Stark');
-
-// Punto 2 y 3. Muestra por consola todos los persoajes y los guarda en un archivo JSON.
-//getAndSaveAllCharacters();
-
-// Punto 4.a. Función para mostrar los personajes de la familia Stark
-//displayStarkFamily();
-
-// Ejemplo para agregar Personaje. Punto 4.b
-const newCharacter = {
-    id: 100, 
-    firstName: 'Jon',
-    lastName: 'Snow',
-    fullName: 'Jon Snow',
-    title: 'King in the North',
-    family: 'House Stark',
-    image: 'jon-snow.jpg',
-    imageUrl: 'https://thronesapi.com/assets/images/jon-snow.jpg'
-};
-// Punto 4.b Llama a la función para agregar el nuevo personaje
-//addCharacter(newCharacter);
-
-// Punto 4.C. Función para eliminar personajes con ID mayor a 25
-//removeCharactersWithHighID();
-
-
+showMainMenu();
