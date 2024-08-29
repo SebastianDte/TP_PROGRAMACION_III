@@ -1,16 +1,15 @@
 import fetch from 'node-fetch';
 import fs from 'fs';
 
+//Punto1|Recuperar la información de todos los productos (products).
 export async function getAllProducts() {
   try {
-    // Realiza la solicitud a la FakeStore API
+    
     const response = await fetch('https://fakestoreapi.com/products');
     const products = await response.json();
 
-    // Muestra todos los productos en la consola
     console.log('Todos los productos:', products);
 
-    // Guarda los productos en un archivo JSON llamado "products.json"
     fs.writeFileSync('products.json', JSON.stringify(products, null, 2), 'utf8');
     console.log('Los productos han sido guardados en "products.json".');
 
@@ -19,9 +18,9 @@ export async function getAllProducts() {
   }
 }
 
-// Función para recuperar un número limitado de productos
+//Punto2|Recuperar la información de un número limitado de productos (products).
 export async function getLimitedProducts() {
-  const limit = 6; // Cambia este valor al número de productos que deseas recuperar
+  const limit = 6; 
 
   try {
     const response = await fetch(`https://fakestoreapi.com/products?limit=${limit}`);
@@ -34,6 +33,30 @@ export async function getLimitedProducts() {
     console.error('Error:', error);
   }
 }
+
+// export async function addProduct(){
+//   try {
+//     const newProduct = {
+//       id:101,
+//       title:"Nuevo Producto",
+//       price:29.99,
+//       description:"Descripción del nuevo producto",
+//       category:"electronics",
+//       image:https://example.com/image.png
+//     };
+
+//     //-----------
+//     let products = [];
+//     try {
+      
+//     } catch (error) {
+      
+//     }
+
+//   } catch (error) {
+    
+//   }
+// }
 
 // mostrarproductos();
 

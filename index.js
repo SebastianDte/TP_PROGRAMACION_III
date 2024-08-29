@@ -9,7 +9,8 @@ import {
 } from './ejercicio01.js';
 
 import {
-  getAllProducts
+  getAllProducts,
+  getLimitedProducts
 } from './ejercicio02.js';
 
 // interfaz E/S de datos en la consola.
@@ -122,7 +123,7 @@ async function ejercicioDosMenu() {
         break;
       case 2:
         console.log('Recuperando la información de un número limitado de productos...');
-        getLimitedProducts();
+        await getLimitedProducts();
         break;
       case 3:
         console.log('Agregando un nuevo producto...');
