@@ -5,9 +5,9 @@
 | Nombre Completo       | Repositorio GitHub                        |
 |-----------------------|-------------------------------------------|
 | **Sebastián Duarte**  | [sebastianDte](https://github.com/sebastianDte) |
-| **Francisco Molina**  | [frmolinadev](https://github.com/frmolinadev) |
+| **Francisco Molina**  | [frmolinadev](https://github.com/fmolinadev) |
 | **Lucas Díaz**        | [lmd-git](https://github.com/lmd-git) |
-| **Elizabeth Luquez**  | [elizabethluquez](https://github.com/usuario/elizabethluquez) |
+| **Elizabeth Luquez**  | [elizabethluquez](https://github.com/elizabethluquez) |
 | **Solange Martinez**  | [Solange](https://github.com/usuario/repositorio5) |
 
 ## Descripción
