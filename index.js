@@ -7,7 +7,10 @@ import {
   removeCharactersWithHighID, 
   showUpdatedList
 } from './ejercicio01.js';
-import {} from './ejercicio02.js';
+
+import {
+  getAllProducts
+} from './ejercicio02.js';
 
 // interfaz E/S de datos en la consola.
 const rl = readline.createInterface({
@@ -102,7 +105,7 @@ function ejercicioUnoMenu() {
 }
 
 // Función Ejercicio 2.
-function ejercicioDosMenu() {
+async function ejercicioDosMenu() {
   console.clear();
   console.log("Pulse '1' para Recuperar la información de todos los productos");
   console.log("Pulse '2' para Recuperar la información de un número limitado de productos.");
@@ -111,15 +114,15 @@ function ejercicioDosMenu() {
   console.log("Pulse '5' para Eliminar un producto.");
   console.log("Pulse '0' para volver al menú principal.");
 
-  rl.question('Seleccione una opción: ', (opcion) => {
+  rl.question('Seleccione una opción: ', async(opcion) => {
     switch (parseInt(opcion)) {
       case 1:
         console.log('Recuperando la información de todos los productos...');
-        //función.
+        await getAllProducts();
         break;
       case 2:
         console.log('Recuperando la información de un número limitado de productos...');
-        //función.
+        getLimitedProducts();
         break;
       case 3:
         console.log('Agregando un nuevo producto...');
