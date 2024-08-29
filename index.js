@@ -7,6 +7,7 @@ import {
   removeCharactersWithHighID, 
   showUpdatedList
 } from './ejercicio01.js';
+import {} from './ejercicio02.js';
 
 // interfaz E/S de datos en la consola.
 const rl = readline.createInterface({
@@ -102,30 +103,47 @@ function ejercicioUnoMenu() {
 
 // Función Ejercicio 2.
 function ejercicioDosMenu() {
-  console.log("Pulse '1' para ejecutar el punto 1 del Ejercicio 2.");
-  console.log("Pulse '2' para ejecutar el punto 2 del Ejercicio 2.");
+  console.clear();
+  console.log("Pulse '1' para Recuperar la información de todos los productos");
+  console.log("Pulse '2' para Recuperar la información de un número limitado de productos.");
+  console.log("Pulse '3' para Agregar un nuevo producto.");
+  console.log("Pulse '4' para Retornar un producto según un ID.");
+  console.log("Pulse '5' para Eliminar un producto.");
   console.log("Pulse '0' para volver al menú principal.");
 
   rl.question('Seleccione una opción: ', (opcion) => {
     switch (parseInt(opcion)) {
       case 1:
-        console.log('Ejecutando el punto 1 del Ejercicio 2...');
-        // Aquí iría la llamada a la función correspondiente
+        console.log('Recuperando la información de todos los productos...');
+        //función.
         break;
       case 2:
-        console.log('Ejecutando el punto 2 del Ejercicio 2...');
-        // Aquí iría la llamada a la función correspondiente
+        console.log('Recuperando la información de un número limitado de productos...');
+        //función.
+        break;
+      case 3:
+        console.log('Agregando un nuevo producto...');
+        //función.
+        break;
+      case 4:
+        console.log('Buscando el producto por ID ');
+        //función.
+        break;
+      case 5:
+        console.log('Eliminando el producto por ID ');
+        //función.
         break;
       case 0:
-        showMainMenu(); // Volver al menú principal
-        return; // Sale de la función para detener el bucle
+        showMainMenu(); 
+        return;
       default:
         console.log('Opción no válida.');
         break;
     }
+
     setTimeout(() => {
-      showExercise2Menu(); 
-    }, 1000); 
+      ejercicioDosMenu();
+    }, 1000);
   });
 }
 
