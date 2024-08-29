@@ -258,15 +258,5 @@
     "family": "None",
     "image": "gilly.jpg",
     "imageUrl": "https://thronesapi.com/assets/images/gilly.jpg"
-  },
-  {
-    "id": 100,
-    "firstName": "Jon",
-    "lastName": "Snow",
-    "fullName": "Jon Snow",
-    "title": "King in the North",
-    "family": "House Stark",
-    "image": "jon-snow.jpg",
-    "imageUrl": "https://thronesapi.com/assets/images/jon-snow.jpg"
   }
 ]

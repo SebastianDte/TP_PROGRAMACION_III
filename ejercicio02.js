@@ -10,7 +10,7 @@ export async function getAllProducts() {
 
     console.log('Todos los productos:', products);
 
-    fs.writeFileSync('products.json', JSON.stringify(products, null, 2), 'utf8');
+    fs.writeFileSync('products.json', JSON.stringify(products, null, 2), 'utf-8');
     console.log('Los productos han sido guardados en "products.json".');
 
   } catch (error) {
@@ -34,66 +34,80 @@ export async function getLimitedProducts() {
   }
 }
 
-// export async function addProduct(){
-//   try {
-//     const newProduct = {
-//       id:101,
-//       title:"Nuevo Producto",
-//       price:29.99,
-//       description:"Descripción del nuevo producto",
-//       category:"electronics",
-//       image:https://example.com/image.png
-//     };
-
-//     //-----------
-//     let products = [];
-//     try {
-      
-//     } catch (error) {
-      
-//     }
-
-//   } catch (error) {
+//Punto3|Agregar un nuevo producto (product).
+export function addProduct(){
+  try {
+    const newProduct = {
+      id:101,
+      title:"Nuevo Producto",
+      price:29.99,
+      description:"Descripción del nuevo producto",
+      category:"electronics",
+      image:"https://example.com/image.png"
+    };
     
-//   }
-// }
+    let products = [];
+    try {
+      const data = fs.readFileSync('products.json','utf-8');
+      products = JSON.parse(data);
+      products.push(newProduct);
+      const jsonUpdated = fs.writeFileSync('products.json',JSON.stringify(products,null,2),'utf-8');
+      console.log('Producto creado con éxito');
+      return jsonUpdated
 
-// mostrarproductos();
+    } catch (error) {
+      console.error('Error leyendo el archivo: ',error);
+    }
 
-// async function obtenerProductosLimitados(cantidad) {
-//     try {
-//         let respuesta = await fetch('https://fakestoreapi.com/products');
-//         let productos = await respuesta.json();
-        
-//         // Filtra y retorna solo la cantidad deseada de productos
-//         let productosFiltrados = productos.filter((producto, index) => index < cantidad);
-//         return productosFiltrados;
-//     } catch (error) {
-//         console.error(`Error al obtener ${cantidad} productos:`, error);
-//     }
-// }
-// obtenerProductosLimitados(15).then(productos => console.log(productos));
+  } catch (error) {
+    console.error('Error',error);
+  }
+}
 
-//const fs = require('fs');
+//Punto4|Retornar un producto (product) según un “id” como parámetro.
+export function getProductById(){
+  try {
+    const productsData = fs.readFileSync('products.json','utf-8');
+    const idProductToSearch = 3
+    const products = JSON.parse(productsData); 
+    const haveProduct =  products.filter(product => product.id === idProductToSearch)
 
-// const datos = fs.readFileSync('./productos.json', 'utf-8');
-// const productos = JSON.parse(datos);
+    if(haveProduct){
+      console.log(`El producto con el id ${idProductToSearch} es: `,haveProduct )
+    } else {
+      console.log(`El producto con el id ${idProductToSearch} no esta disponible.` )
+    }
+    
+  } catch (error) {
+    console.log("Error al buscar el producto. Intete nuevamente más tarde.")
+  }
+} 
 
-// // console.log(productos);
-// function escribirproducto (productos) {
-// fs.writeFileSync('./productos.json', JSON.stringify(productos, null, 2), 'utf-8');
-// }
 
-// const agregarproducto = {
-//     "id": 21,
-//     "title": "Silicon Power 256GB SSD 3D NAND A55 SLC Cache Performance Boost SATA III 2.5",
-//       "price": 109,
-//       "description": "3D NAND flash are applied to deliver high transfer speeds Remarkable transfer speeds that enable faster bootup and improved overall system performance. The advanced SLC Cache Technology allows performance boost and longer lifespan 7mm slim design suitable for Ultrabooks and Ultra-slim notebooks. Supports TRIM command, Garbage Collection technology, RAID, and ECC (Error Checking & Correction) to provide the optimized performance and enhanced reliability.",
-//       "category": "electronics",
-//       "image": "https://fakestoreapi.com/img/71kWymZ+c+L._AC_SX679_.jpg",
-//       "rating": {"rate": 4.8, "count": 319}
-// }
 
-// productos.push(agregarproducto);
-// console.log (productos)
-// escribirproducto (productos);
+
+//Punto5|Eliminar(product).
+export function removePrductById(){
+  try {
+    const deleteProductId = 5
+    let products = [];
+    const data = fs.readFileSync('products.json','utf-8');
+    products = JSON.parse(data);
+
+    const filteredProducts = products.filter(product => product.id !== deleteProductId);
+    if(filteredProducts.length === products.length){
+       console.log(`El producto con el id ${idProductToSearch} noexiste en productos.` );
+    } else {
+       const jsonUpdated = fs.writeFileSync('products.json',JSON.stringify(filteredProducts,null,2),'utf-8');
+      console.log("Producto eliminado satisfactoriamente.");
+      return jsonUpdated;
+    }
+  } catch (error) {
+    console.error('Error al leer el archivo ', error);
+    return; 
+  }
+}
+
+
+
+

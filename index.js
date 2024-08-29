@@ -10,7 +10,11 @@ import {
 
 import {
   getAllProducts,
-  getLimitedProducts
+  getLimitedProducts,
+  addProduct,
+  getProductById,
+  removePrductById
+
 } from './ejercicio02.js';
 
 // interfaz E/S de datos en la consola.
@@ -127,15 +131,15 @@ async function ejercicioDosMenu() {
         break;
       case 3:
         console.log('Agregando un nuevo producto...');
-        //función.
+        await addProduct();
         break;
       case 4:
         console.log('Buscando el producto por ID ');
-        //función.
+        getProductById();
         break;
       case 5:
         console.log('Eliminando el producto por ID ');
-        //función.
+        removePrductById();
         break;
       case 0:
         showMainMenu(); 
@@ -147,7 +151,7 @@ async function ejercicioDosMenu() {
 
     setTimeout(() => {
       ejercicioDosMenu();
-    }, 1000);
+    }, 10000);
   });
 }
 
